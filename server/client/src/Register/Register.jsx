@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import useStyles from './styles'
 import axios from 'axios'
 import { UserContext } from '../contexts/User'
-import { axiosInstance } from '../config'
+// import { axiosInstance } from '../config'
 
 
 const defaultForm = {
@@ -34,7 +34,7 @@ function Register() {
     const { confirmPassword, ...registrationDetails } = formDetails
     if (formDetails.password !== confirmPassword) return
     try {
-      const serverResponse = await axiosInstance.post("/auth/register", registrationDetails)
+      const serverResponse = await axios.post("https://my-localize-app.herokuapp.com/api/auth/register", registrationDetails)
       if(serverResponse.status === 200){
         setUser(registrationDetails)
         setFormDetails(defaultForm)
@@ -55,9 +55,6 @@ function Register() {
   }
 
   return (
-
-
-
     <Box className={classes.container}>
 
       <Box className={classes.formContainer}>
@@ -115,7 +112,7 @@ function Register() {
           />
         </FormControl>
         <Typography variant="subtitle2">Already have an account? Click <Link to="/login">here</Link></Typography>
-        <Button onClick={handleSubmit} size="large" variant="contained">Login</Button>
+        <Button onClick={handleSubmit} size="large" variant="contained">Register</Button>
       </Box>
     </Box>
 

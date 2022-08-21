@@ -12,7 +12,7 @@ import { Rating } from '@mui/material';
 import axios from 'axios';
 import { UserContext } from '../../contexts/User';
 import { FavoriteRounded } from '@material-ui/icons';
-import { axiosInstance } from '../../config';
+// import { axiosInstance } from '../../config';
 
 function Details({ place, selected, refProp }) {
   const { favoritePlaces, setFavoritePlaces } = useContext(PlacesContext)
@@ -23,10 +23,10 @@ function Details({ place, selected, refProp }) {
   const addToFavorites = async () => {
     if (favoritePlaces.find(item => item.description.location_id === place.location_id)) return alert("Already saved in favorites...")
     try {
-      const savedPlace = await axiosInstance.post("/location", { username: user.username, description: JSON.stringify(place) })
+      const savedPlace = await axios.post("https://my-localize-app.herokuapp.com/api/location", { username: user.username, description: JSON.stringify(place) })
       const fetchLocationData = async () => {
         try {
-          const response = await axiosInstance.get("/location")
+          const response = await axios.get("https://my-localize-app.herokuapp.com/api/location")
           const parsedPlaces = response.data.map(place => {
             return {...place, description: JSON.parse(place.description)}
           })

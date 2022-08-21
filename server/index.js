@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const cors = require("cors")
+const path = require('path');
+
 
 const PORT = 8000;
 const locationsRouter = require("./routes/locations.js");
@@ -25,12 +27,9 @@ async function connectToDb() {
   }
 }
 
-app.get("/", (req, res) => {
-  res.json("connected");
-});
 
+app.use(express.static(path.join(__dirname, "/client/build")))
 app.use("/api/location", locationsRouter);
-
 app.use("/api/auth", authRouter);
 
 // Error Handling
@@ -45,14 +44,13 @@ app.use((err, req, res, next) => {
   });
 });
 
+
 // Use of static folder
-app.use(express.static(path.join(__dirname, "/client/build")))
 
 // Display index.html file on any request
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build", "index.html"))
-})
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running... Listening on port ${PORT}`);

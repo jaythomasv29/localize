@@ -3,7 +3,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { axiosInstance } from '../config'
+// import { axiosInstance } from '../config'
 import { UserContext } from '../contexts/User'
 import useStyles from './styles'
 const initialFormDetails = {
@@ -27,7 +27,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const data = await axiosInstance.post("/auth/login", formDetails)
+      const data = await axios.post("https://my-localize-app.herokuapp.com/api/auth/login", formDetails)
       if(data?.status === 200) {
         setUser(data.data)
         setFormDetails(initialFormDetails)

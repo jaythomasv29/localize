@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useContext } from "react"
 import { createContext, useEffect, useState } from "react"
-import { axiosInstance } from "../config"
+// import { axiosInstance } from "../config"
 import { UserContext } from "./User"
 
 export const PlacesContext = createContext({
@@ -23,7 +23,7 @@ export const PlacesProvider = ({ children }) => {
     if(!user) return setFavoritePlaces([])
      const fetchLocationData = async () => {
       try {
-        const response = await axiosInstance.get("/location")
+        const response = await axios.get("https://my-localize-app.herokuapp.com/api/location")
         const parsedPlaces = response.data.map(place => {
           return {...place, description: JSON.parse(place.description)}
         })

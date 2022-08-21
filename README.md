@@ -1,6 +1,11 @@
 #### Localize
 Welcome to Localize, its an application that loads local businesses / parks / attractions that are within the map region. We use the browsers native `navigator.geolocation.getCurrentPosition()` method to get latitude and longitude coordinates.
 
+View demo of app here: [Localize App ](https://my-localize-app.herokuapp.com/)
+1. Try logging in and registering
+1. Try adding a favorite place, going to the `favorites page` and then logging out and seeing the data again after authenticating
+* Note: Registration is part of accessing the website
+
 ----------
 ##### App Screenshots
 ![home](/screenshots/home.png)
